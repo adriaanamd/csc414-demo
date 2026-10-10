@@ -8,7 +8,11 @@
     "build": "vite build --config vite.config.ts",
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "vitest run --config vitest.config.ts"
+    "test": "vitest run --config vitest.config.ts",
+    "test:unit": "vitest run tests/unit --config vitest.config.ts",
+    "test:ui": "vitest run tests/ui --config vitest.config.ts",
+    "test:e2e": "vitest run tests/e2e --config vitest.config.ts",
+    "test:watch": "vitest --config vitest.config.ts"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -42,6 +46,9 @@
     "@tailwindcss/typography": "^0.5.15",
     "@tailwindcss/vite": "catalog:",
     "@tanstack/react-query": "catalog:",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
@@ -54,6 +61,7 @@
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "catalog:",
     "input-otp": "^1.4.2",
+    "jsdom": "^26.0.0",
     "lucide-react": "catalog:",
     "next-themes": "^0.4.6",
     "react": "catalog:",

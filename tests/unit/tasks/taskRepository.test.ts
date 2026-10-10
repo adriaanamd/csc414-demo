@@ -3,7 +3,7 @@ import initializeSqlJs, { type Database, type SqlJsStatic } from 'sql.js';
 import {
   createTaskRepository,
   type TaskPersistence,
-} from './taskRepository';
+} from '@/lib/taskRepository';
 
 let sql: SqlJsStatic;
 

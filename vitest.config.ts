@@ -8,8 +8,15 @@ export default defineConfig({
     },
   },
   test: {
-    environment: 'node',
-    include: ['src/**/*.test.ts'],
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['./tests/setup.ts'],
+    include: ['tests/**/*.test.{ts,tsx}'],
+    environmentMatchGlobs: [
+      ['tests/unit/**', 'node'],
+      ['tests/ui/**', 'jsdom'],
+      ['tests/e2e/**', 'jsdom'],
+    ],
     restoreMocks: true,
   },
 });
