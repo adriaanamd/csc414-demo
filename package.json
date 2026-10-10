@@ -12,6 +12,7 @@
     "test:unit": "vitest run tests/unit --config vitest.config.ts",
     "test:ui": "vitest run tests/ui --config vitest.config.ts",
     "test:e2e": "vitest run tests/e2e --config vitest.config.ts",
+    "verify": "npm run typecheck && npm run test:unit && npm run test:ui && npm run test:e2e && npm run build",
     "test:watch": "vitest --config vitest.config.ts"
   },
   "devDependencies": {
