@@ -102,6 +102,19 @@ export function createTaskRepository({
       }
 
       const database = await getDatabase();
+      const duplicateStatement = database.prepare(
+        'SELECT 1 FROM tasks WHERE LOWER(TRIM(title)) = LOWER(?) LIMIT 1',
+      );
+
+      try {
+        duplicateStatement.bind([normalizedTitle]);
+        if (duplicateStatement.step()) {
+          throw new Error('A task with this name already exists.');
+        }
+      } finally {
+        duplicateStatement.free();
+      }
+
       const task: Task = {
         id: createId(),
         title: normalizedTitle,

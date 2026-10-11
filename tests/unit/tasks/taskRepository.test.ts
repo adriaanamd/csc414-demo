@@ -89,4 +89,24 @@ describe('SQLite task repository', () => {
       'Enter a task before adding it.',
     );
   });
+
+  it('rejects an exact duplicate and keeps the original task', async () => {
+    const repository = makeRepository(createMemoryPersistence());
+    const original = await repository.add('Buy groceries');
+
+    await expect(repository.add('Buy groceries')).rejects.toThrow(
+      'A task with this name already exists.',
+    );
+    await expect(repository.list()).resolves.toEqual([original]);
+  });
+
+  it('rejects duplicates that differ only by capitalization and surrounding whitespace', async () => {
+    const repository = makeRepository(createMemoryPersistence());
+    const original = await repository.add('Buy groceries');
+
+    await expect(repository.add('  buy GROCERIES  ')).rejects.toThrow(
+      'A task with this name already exists.',
+    );
+    await expect(repository.list()).resolves.toEqual([original]);
+  });
 });
