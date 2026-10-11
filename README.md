@@ -68,6 +68,18 @@ The workflow is human-in-the-loop:
 
 Approval sequencing is an instruction-based control. Vitest, npm, and GitHub Actions verify software quality but cannot technically enforce conversational approval checkpoints.
 
+### Live approval markers
+
+For the webinar, make the pauses visible. End each proposal with one of these markers and wait for the exact approval phrase:
+
+```text
+RED — awaiting approval       -> approve red
+GREEN — awaiting approval     -> approve green
+REFACTOR — awaiting approval  -> approve refactor
+```
+
+An ambiguous response is not approval. Ask the presenter which phase to continue. If a test or verification command fails, stay in the current phase and report the failure before proceeding.
+
 See [AGENTS.md](AGENTS.md) for repository operating rules and [the harness guide](docs/ai-assisted-tdd-harness.md) for the webinar explanation.
 
 ## Webinar demo runbook
@@ -79,9 +91,12 @@ Before presenting:
 3. Show `AGENTS.md` and explain the approval checkpoints.
 4. Invoke `superpowers:test-driven-development`.
 5. Present a small requirement and ask Codex to propose the RED test.
-6. Approve the test, run it, and show the expected failure.
-7. Approve the minimum GREEN implementation.
-8. Run the targeted test, then finish with `npm run verify`.
+6. Wait for `RED — awaiting approval`, then respond `approve red`.
+7. Run the test and show the expected failure.
+8. Ask Codex to propose the minimum GREEN implementation, wait for `GREEN — awaiting approval`, then respond `approve green`.
+9. Run the targeted test and show the passing result.
+10. If demonstrating refactoring, wait for `REFACTOR — awaiting approval`, respond `approve refactor`, and rerun the checks.
+11. Finish with `npm run verify`.
 
 Keep a known-good checkout or recording as a fallback. A live failure should be reported honestly; do not skip checks or weaken tests during the presentation.
 

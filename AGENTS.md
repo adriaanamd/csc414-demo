@@ -27,6 +27,24 @@ The skill is the authoritative detailed procedure. This repository adds human ap
 
 Never advance from RED to GREEN or GREEN to REFACTOR without the corresponding developer approval. These approval gates are instruction-based controls; the repository and GitHub Actions do not technically enforce conversational sequencing.
 
+### Interactive demo protocol
+
+When demonstrating this harness in Codex, use explicit phase stops. After each proposal, end the response immediately with the matching marker and wait for the developer’s next message:
+
+```text
+RED — awaiting approval
+GREEN — awaiting approval
+REFACTOR — awaiting approval
+```
+
+Use these approval phrases for the live demonstration:
+
+- `approve red` permits writing and running the proposed failing tests.
+- `approve green` permits the minimum implementation after RED has been verified.
+- `approve refactor` permits only the approved behavior-preserving cleanup.
+
+Do not interpret silence, a topic change, or an ambiguous response as approval. If the response is unclear, ask which phase the developer wants to approve. If a phase fails, remain in that phase, report the exact failure, and do not propose or perform the next phase until the developer directs recovery.
+
 ## Allowed and prohibited operations
 
 Allowed operations are read-only reconnaissance, edits directly required by an approved task, existing project scripts, and temporary isolated test fixtures that are removed after validation.

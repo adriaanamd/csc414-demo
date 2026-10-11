@@ -33,6 +33,26 @@ After green, identify only safe behavior-preserving improvements. Wait for appro
 
 The agent must not move between these phases without the required developer approval. Approval sequencing is a documented process control, not a technically enforced property of Vitest, npm, Codex, or GitHub Actions.
 
+## Interactive demo protocol
+
+For a live Codex demonstration, make each pause explicit and observable. The agent should finish its response after the proposal with exactly one of these markers:
+
+```text
+RED — awaiting approval
+GREEN — awaiting approval
+REFACTOR — awaiting approval
+```
+
+The presenter then responds with the matching command:
+
+```text
+approve red
+approve green
+approve refactor
+```
+
+The marker is a deliberate conversational stop, not a claim that the phase has already been completed. The agent must not edit files or run the next phase until the matching approval is received. Silence, a subject change, or an ambiguous “okay” is not approval; ask the presenter to identify the phase. When a command fails, remain in the current phase, preserve the failure evidence, and ask how to recover.
+
 ## Verification
 
 Run the full local gate with:
